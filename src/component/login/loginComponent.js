@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Example } from '../../comon/reactRangerSlick'
-import { AiOutlineCheckCircle } from 'react-icons/ai';
+import { AiOutlineCheckCircle, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { FiUser } from 'react-icons/fi';
 import { RiLockPasswordLine } from 'react-icons/ri';
+
 import {
 
     // Link,
@@ -17,7 +18,8 @@ import notification from "../../comon/notification/notification"
 // import checkAuth from "../../Api/checkAuthToken"
 import jwt_decode from "jwt-decode";
 import Loading from '../../comon/loading';
-
+import backgroundlogin from '../../asset/images/Future-of-the-Internet.png';
+import LoadingAnimation from '../../comon/loading';
 export default function LoginComponent() {
 
     const match = useRouteMatch()
@@ -30,6 +32,8 @@ export default function LoginComponent() {
     const [countErrorLogin, setCountError] = useState(0)
     const [countDownLogin, setDownLogin] = useState(15)
     const [verifyCountErrorLogin, setVerifyError] = useState(false)
+    const [show, setShow] = useState(false)
+    const [loading, setLoading] = useState(false)
     const handleLogin = (field, value) => {
         setLogin({
             ...login,
@@ -61,19 +65,27 @@ export default function LoginComponent() {
     const handleSubmitLogin = async () => {
 
         try {
+
+            if (!login?.userName || !login?.passWord) {
+                notification.error('Làm ơn nhập đầy đủ thông tin')
+            }
             const response = await AxiosConfigSever.postUserLogin(login)
             const decodeUser = jwt_decode(response?.data?.accessToken)
-            console.log(response, 'res');
+            // console.log(response, 'res');
             if (response?.data?.success) {
-
-                notification.success('Đăng nhập thành công')
-
-                const action = loginForm({ ...login, id: decodeUser?.userId, verify: decodeUser?.verify, role: decodeUser?.role, wallet: decodeUser?.wallet })
-                dispatch(action)
-                localStorage.setItem('account', response?.data?.accessToken)
+                setLoading(true)
                 setTimeout(() => {
+                    setLoading(false)
+                    notification.success('Đăng nhập thành công')
+
+                    const action = loginForm({ ...login, id: decodeUser?.userId, verify: decodeUser?.verify, role: decodeUser?.role, wallet: decodeUser?.wallet })
+                    dispatch(action)
+                    localStorage.setItem('account', response?.data?.accessToken)
+                    // setTimeout(() => {
                     history.push('/')
-                }, 1000);
+                    // }, 1000);
+                }, 2000);
+
 
 
             } else {
@@ -91,9 +103,20 @@ export default function LoginComponent() {
     // console.log(countErrorLogin);
     return (
         <>
-            <div className={`${pathFormat === "login-page" ? "bg-all" : ""}`}>
-                <div className="login-container shadow-sm p-3 mb-5 bg-body rounded">
-                    <h5 className="mb-5">Login to Polkastater</h5>
+            <div className={`${pathFormat === "login-page" ? "bg-all p-2 mt-5" : ""}`}>
+                <div className={`img-bg w-100 h-100 ${loading ? "img-bg-animation" : null}`}>
+                    {
+                        loading ? <div className='bg-animation'><LoadingAnimation type="spinningBubbles" color="white" width={20} height={20} className="loading-animation" /></div> : null
+                    }
+                    <img src={backgroundlogin} alt="" />
+                </div>
+
+                <div className={`login-container shadow-sm p-3  bg-body rounded ${loading ? "login-animation" : null}`}>
+                    <div to="/" className="w-100 titlbracum-left d-flex mb-3">
+                        <span className=""><img src="./images/pols.png" width={30} height={30} /></span>
+                        <h5 className="">Login to PolkastaterCoin</h5>
+                    </div>
+
                     <form>
                         <div className="mb-3">
                             <label htmlFor="exampleInputEmail1" className="form-label"><span className="mx-2"><FiUser /></span>Email address</label>
@@ -102,7 +125,11 @@ export default function LoginComponent() {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleInputPassword1" className="form-label"><span className="mx-2"><RiLockPasswordLine /></span>Password</label>
-                            <input type="password" className="form-control" id="exampleInputPassword1" onChange={(e) => handleLogin('passWord', e.target.value)} />
+                            <div className='container_all_pass'>
+                                <input type={show ? `text` : `password`} className="form-control" id="exampleInputPassword1" onChange={(e) => handleLogin('passWord', e.target.value)} />
+                                <span className='mx-2 show_pass'>{show ? <AiOutlineEye onClick={() => setShow(false)} /> : <AiOutlineEyeInvisible onClick={() => setShow(true)} />}</span>
+                            </div>
+
                         </div>
                         <div className="mb-3 form-check">
                             <input type="checkbox" className="form-check-input" id="exampleCheck1" />
@@ -129,9 +156,8 @@ export default function LoginComponent() {
                     </form>
 
                 </div>
-
-
             </div>
+
         </>
     )
 }

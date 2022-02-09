@@ -60,7 +60,7 @@ export default function BottomMain() {
                                         </td>
                                         <td>${e?.current_price.toLocaleString()}</td>
                                         {
-                                            e?.price_change_percentage_24h < 0 ? <td className="color-up text-danger">{e?.price_change_percentage_24h ? e?.price_change_percentage_24h.toFixed(2) : "chưa có dữ liệu"}</td> : <td className="color-up text-success">{e?.price_change_percentage_24h ? e?.price_change_percentage_24h.toFixed(2) : "Chưa có dữ liệu"}</td>
+                                            e?.price_change_percentage_24h < 0 ? <td className="color-up text-danger">{e?.price_change_percentage_24h ? e?.price_change_percentage_24h.toFixed(2) + "%" : "chưa có dữ liệu"}</td> : <td className="color-up text-success">{e?.price_change_percentage_24h ? e?.price_change_percentage_24h.toFixed(2) + "%" : "Chưa có dữ liệu"}</td>
                                         }
 
                                         <td>${e?.high_24h ? e?.high_24h.toLocaleString() : "chưa cso dữ liệu"}</td>

@@ -7,7 +7,7 @@ export default function LoginPage() {
     return (
         <div>
             <section className="container-all">
-                <Header />
+                {/* <Header /> */}
                 <LoginComponent />
                 {/* <Footer /> */}
             </section>

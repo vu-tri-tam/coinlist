@@ -89,7 +89,7 @@ export default function Item({ ...data }) {
                 <div className="detail-coin d-flex">
                     <p>${data?.data?.current_price.toLocaleString()}</p>
                     {
-                        data?.data?.price_change_percentage_24h < 0 ? <p className="text-right text-danger">{data?.data?.price_change_percentage_24h.toFixed(2)}%</p> : <p className="text-right text-success">{data?.data?.price_change_percentage_24h.toFixed(2)}%</p>
+                        data?.data?.price_change_percentage_24h < 0 ? <p className="text-right text-danger"><a className='bg-price_change bg-danger'>{data?.data?.price_change_percentage_24h.toFixed(2)}%</a></p> : <p className="text-right text-success"><a className='bg-success bg-price_change'>{data?.data?.price_change_percentage_24h.toFixed(2)}%</a></p>
                     }
 
                 </div>

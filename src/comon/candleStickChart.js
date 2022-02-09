@@ -42,11 +42,11 @@ export default function CandleStickChart({ id, data, valueChart }) {
                 type: 'area',
                 stacked: false,
                 height: 350,
-                zoom: {
-                    type: 'x',
-                    enabled: true,
-                    autoScaleYaxis: true
-                },
+                // zoom: {
+                //     type: 'x',
+                //     enabled: true,
+                //     // autoScaleYaxis: true
+                // },
                 toolbar: {
                     autoSelected: 'zoom'
                 },

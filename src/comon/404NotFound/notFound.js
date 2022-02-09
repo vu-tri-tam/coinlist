@@ -14,7 +14,7 @@ export default function NotFound() {
                 <h1>Lỗi không tìm thấy trang yêu cầu </h1>
                 <p className='mb-5'>Rất tiếc chúng tôi không tìm thấy trang bạn cần tìm
                     xin lỗi vì sự bất tiện này</p>
-                <a className='btn-not-found' href='/home'>Trang chủ</a>
+                <a className='btn-not-found' href='/'>Trang chủ</a>
             </div>
 
         </div>

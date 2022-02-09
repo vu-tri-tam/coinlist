@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import ChartCrypto from '../../comon/chartCrypto'
-import { AiOutlineExclamationCircle } from 'react-icons/ai';
+import { AiOutlineExclamationCircle, AiOutlineSearch, AiOutlineLink } from 'react-icons/ai';
+import { FaRegUser } from 'react-icons/fa';
+import { RiArrowDropDownLine } from 'react-icons/ri';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import {
 
@@ -40,6 +42,7 @@ export default function DetailCoinLeft({ e, id }) {
         }
 
     }
+
     return (
         <div className="detail-main-left">
             <div className="link">
@@ -65,6 +68,27 @@ export default function DetailCoinLeft({ e, id }) {
                     <Link to="#" className='add-watch-list'><span><i className="fa fa-star-o" aria-hidden="true" /></span>Add to Wacthlist</Link>
                 </div>
             </div>
+            <div className='social'>
+                <ul>
+                    <li><a className='bg-price_change bg-light p-1 text-secondary' ><AiOutlineLink />{e?.id}</a></li>
+                    <li><a className='bg-price_change bg-light p-1 text-secondary'><AiOutlineSearch />Trình duyệt</a></li>
+
+                    <li className='hover-social bg-price_change bg-light p-1 text-secondary'><FaRegUser />Cộng đồng<RiArrowDropDownLine />
+                        <div className='bg-socical'>
+                            <ul>
+                                <li><a href={`https://twitter.com/${e?.id}`}>https://twitter.com/{e?.id}</a></li>
+                                <li><a href={`reddit.com/r/${e?.id}`}>reddit.com/r/{e?.id}/</a></li>
+                            </ul>
+                        </div>
+
+
+                    </li>
+
+                </ul>
+            </div>
+            {/* <p className='cc'>cc
+               </p> */}
+
             <div className="contai-left-all">
                 {
                     chooseChart !== false ? <div className="detai-container">
@@ -91,6 +115,13 @@ export default function DetailCoinLeft({ e, id }) {
                         <option value="Price (USD)" >Price (USD)</option>
                         <option value="Price volumn" >Price volumn</option>
                     </select>
+                    <div className="value-chart" >
+                        <ul>
+                            <li><Link to="#" onClick={() => setValueChart(1)}>1D</Link></li>
+                            <li><Link to="#" onClick={() => setValueChart(2)}>1W</Link></li>
+                            <li><Link to="#" onClick={() => setValueChart(3)}>1Y</Link></li>
+                        </ul>
+                    </div>
                 </div>
                 <div className="css-ua8w78 d-flex w-100">
                     <div className='d-flex' style={{ width: "25%" }}>

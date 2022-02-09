@@ -91,14 +91,14 @@ export default function ActiveCoin({ e, choosePrice, countPrice, coins, handleCh
                     <input type="text" Value={countPrice || 0} className={`fomat-input border-0 ${choosePrice.name === "" ? "d-none" : "d-block"}`} style={{ outline: "none" }} />
                 </div>
             </div>
-            <div>
+            <div style={{ position: "relative" }}>
                 <h5 className="mt-5 d-flex" style={{ alignItems: "center" }}>1 {e?.symbol.toUpperCase()}<span>=</span>{e?.current_price.toLocaleString()}<span>$</span></h5>
                 <p>Rate is for only reference only 2 year ago</p>
                 <button className="btn btn-primary w-100 mt-3" disabled={countPrice !== 0 ? false : true} onClick={() => setstate(!state)}>
                     Buy {e?.symbol.toUpperCase()}
                 </button>
-
                 <Tooltip show={state} setstate={setstate} e={e} coins={coins} />
+
 
 
             </div>

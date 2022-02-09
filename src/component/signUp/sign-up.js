@@ -10,11 +10,16 @@ import {
     useHistory
 
 } from "react-router-dom";
+import backgroundlogin from '../../asset/images/Future-of-the-Internet.png';
+
+import { AiOutlineCheckCircle, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+
 export default function SignUp() {
 
     const [signUp, setSignUp] = useState({})
     const history = useHistory()
-
+    const [show, setShow] = useState(false)
+    const [showConfirmPass, setShowConfirmPass] = useState(false)
     const handleRegister = (field, value) => {
 
         setSignUp({ ...signUp, [field]: value })
@@ -23,9 +28,13 @@ export default function SignUp() {
     const handleSubmitRegister = async () => {
 
         try {
-            if (signUp.passWord !== signUp.confirmPass) {
+            if (!signUp?.userName || !signUp?.passWord) {
+                notification.error('Điền đầy đủ thông tin dùm đi bạn')
+            }
+            else if (signUp.passWord !== signUp.confirmPass) {
                 notification.error('Xác nhận mật khẩu không khớp')
-            } else {
+            }
+            else {
                 const response = await AxiosConfigSever.postUserRegister(signUp);
                 if (response?.data?.success) {
                     notification.success('Tạo tài khoản thành công')
@@ -37,12 +46,20 @@ export default function SignUp() {
 
         } catch (error) {
             console.log(error);
+            notification.error('Có vẻ như xảy ra lỗi liên quan đến internet')
         }
     }
     return (
-        <div className="bg-all">
-            <div className="login-container shadow-sm p-3 mb-5 bg-body rounded">
-                <h5 className="mb-5">Sign up to Polkastater</h5>
+        <div className={"bg-all p-2"}>
+            <div className='img-bg w-100 h-100'>
+                <img src={backgroundlogin} alt="" />
+            </div>
+
+            <div className="login-container shadow-sm p-3  bg-body rounded">
+                <div to="/" className="w-100 titlbracum-left d-flex mb-3">
+                    <span className=""><img src="./images/pols.png" width={30} height={30} /></span>
+                    <h5 className="">Sign up to PolkastaterCoin</h5>
+                </div>
                 <form>
                     <div className="mb-3">
                         <label htmlFor="exampleInputEmail1" className="form-label"><span className="mx-2"><FiUser /></span>Email address</label>
@@ -51,11 +68,19 @@ export default function SignUp() {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="exampleInputPassword1" className="form-label"><span className="mx-2"><RiLockPasswordLine /></span>Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" onChange={(e) => handleRegister('passWord', e.target.value)} />
+                        <div className='container_all_pass'>
+                            <input type={show ? `text` : `password`} className="form-control" id="exampleInputPassword1" onChange={(e) => handleRegister('passWord', e.target.value)} />
+                            <span className='mx-2 show_pass'>{show ? <AiOutlineEye onClick={() => setShow(false)} /> : <AiOutlineEyeInvisible onClick={() => setShow(true)} />}</span>
+                        </div>
+                        {/* <input type="password" className="form-control" id="exampleInputPassword1" onChange={(e) => handleRegister('passWord', e.target.value)} /> */}
                     </div>
                     <div className="mb-3">
                         <label htmlFor="exampleInputPassword1" className="form-label"><span className="mx-2"><RiLockPasswordLine /></span> Confirm Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" onChange={(e) => handleRegister('confirmPass', e.target.value)} />
+                        <div className='container_all_pass'>
+                            <input type={showConfirmPass ? `text` : `password`} className="form-control" id="exampleInputPassword1" onChange={(e) => handleRegister('confirmPass', e.target.value)} />
+                            <span className='mx-2 show_pass'>{showConfirmPass ? <AiOutlineEye onClick={() => setShowConfirmPass(false)} /> : <AiOutlineEyeInvisible onClick={() => setShowConfirmPass(true)} />}</span>
+                        </div>
+                        {/* <input type="password" className="form-control" id="exampleInputPassword1" onChange={(e) => handleRegister('confirmPass', e.target.value)} /> */}
                     </div>
                     <div className="mb-3 form-check">
                         <input type="checkbox" className="form-check-input" id="exampleCheck1" />
@@ -69,6 +94,7 @@ export default function SignUp() {
 
             </div>
         </div>
+
     )
 }
 

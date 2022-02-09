@@ -42,4 +42,13 @@ export const AxiosConfig = {
     getPlatforms: () => {
         return axiosConfig.get(`/asset_platforms`);
     },
+    getTrendding: () => {
+        return axiosConfig.get(`/search/trending`);
+    },
+    get_public_companies: (id) => {
+        return axiosConfig.get(`/companies/public_treasury/${id}`);
+    },
+    get_Search_coin: (id) => {
+        return axiosConfig.get(`/search?query=${id}`);
+    },
 }

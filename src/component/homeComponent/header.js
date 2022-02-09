@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { AiOutlineSearch, AiOutlineHistory, AiOutlineClose } from 'react-icons/ai';
 import { RiMenuUnfoldFill, RiErrorWarningLine, RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { GiMining, GiConfirmed } from 'react-icons/gi';
-import { MdArrowDropDown } from 'react-icons/md';
+// import { MdArrowDropDown } from 'react-icons/md';
 import { BiLogOut } from 'react-icons/bi';
+import { BsFillMoonFill } from 'react-icons/bs';
 // import { RiArrowDropDownLine } from 'react-icons/bi';
 import { ImProfile, ImFire } from 'react-icons/im';
 import { IoWarningOutline, IoClose } from 'react-icons/io5';
 import { FaBars } from 'react-icons/fa';
-import Accordion from 'react-bootstrap/Accordion'
+
 import { AxiosConfig } from '../../Api/configAxios';
 import {
 
@@ -21,6 +22,7 @@ import { loginOutForm } from '../../feature/Auth';
 import { RemoveVerifyKYC } from '../../feature/VerifyKYC';
 // import AxiosConfigSever from '../../Api/callAPI/callApi';
 import { DropdownButton, Dropdown } from 'react-bootstrap'
+import MenuMobile from './menuMobile/menuMobile';
 // import { from '../../feature/Auth';
 export default function Header() {
 
@@ -28,7 +30,7 @@ export default function Header() {
     const verify = useSelector(state => state.verify)
     // console.log(authUser, 'user');
     const match = useRouteMatch()
-    // console.log(match.path.slice(0, 12));
+    // console.log(match.path.slice(0, 13));
     const [catelogy, setCatelogy] = useState([])
     const [asset_platforms, setAssetPlatforms] = useState([])
     const [coins, setCoins] = useState([])
@@ -80,6 +82,7 @@ export default function Header() {
             }
 
         })
+        // AxiosConfig?.get_Search_coin(data)?.then(res => setCloneCoins(res?.data?.coins))
         setCloneCoins(cloneCoins?.length > 0 ? filterData : coins)
 
     }
@@ -89,103 +92,7 @@ export default function Header() {
     return (
         <header >
             {
-                barMenu ? <div className="bar-reponsive ">
-                    <div className='option-logo'>
-                        <Link to="/" className=" titlbracum-left d-flex ">
-                            <span className="mx-2"><img src="./images/pols.png" width={30} height={30} /></span>
-                            <h5 className="m-0">Polkastater<span>POLS</span></h5>
-                        </Link>
-                        <IoClose onClick={() => setDisplayMenu(false)} />
-                    </div>
-
-                    <Accordion flush>
-                        {/* <Accordion.Item eventKey="0">
-                            <Accordion.Header>Catelogies</Accordion.Header>
-                            <Accordion.Body>
-
-                                <div className="custom-wallet-menu"><Link><span><RiMenuUnfoldFill className="mx-2" />Tổng quan ví</span></Link></div>
-                                <div className="custom-wallet-menu"><Link><span><GiMining className="mx-2" />Đào coin</span></Link></div>
-                                <div className="custom-wallet-menu"><Link><span><AiOutlineHistory className="mx-2" />Lịch sử </span></Link></div>
-
-
-                            </Accordion.Body>
-                        </Accordion.Item> */}
-                        <Accordion.Item eventKey="1">
-                            <Accordion.Header>Wallet</Accordion.Header>
-                            <Accordion.Body>
-                                <div className="custom-wallet-menu"><Link to="/wallet-page"><span><RiMenuUnfoldFill className="mx-2" />Tổng quan ví</span></Link></div>
-                                <div className="custom-wallet-menu"><Link><span><GiMining className="mx-2" />Đào coin</span></Link></div>
-                                <div className="custom-wallet-menu"><Link><span><AiOutlineHistory className="mx-2" />Lịch sử </span></Link></div>
-                            </Accordion.Body>
-                        </Accordion.Item>
-                        <Accordion.Item eventKey="2">
-                            <Accordion.Header>English</Accordion.Header>
-                            <Accordion.Body>
-                                <Link className="dropdown-item" to="#">Vietnam</Link>
-                                <Link className="dropdown-item" to="#">China</Link>
-                                <Link className="dropdown-item" to="#">English</Link>
-                            </Accordion.Body>
-                        </Accordion.Item>
-                        {
-
-                            match.path.slice(1, 12) === '' ? null :
-                                <Accordion.Item eventKey="4">
-                                    <Accordion.Header>Platforms</Accordion.Header>
-                                    <Accordion.Body>
-                                        <ul style={{ maxHeight: "400px", overflowY: "scroll" }}>
-                                            {
-
-                                                asset_platforms?.map((e, i) => {
-                                                    return <li className="w-100"><Link className="dropdown-item" to={e?.id}>{e?.name}</Link></li>
-                                                })
-                                            }
-
-                                        </ul>
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                        }
-
-                        {
-                            authUser?.length > 0 ? <Accordion.Item eventKey="3">
-
-                                <Accordion.Header>{authUser[0]?.userName}</Accordion.Header>
-                                <Accordion.Body>
-                                    <Link className="dropdown-item" to="#" onClick={() => handleLogOut()}><BiLogOut className='mx-2' />Logout</Link>
-                                    <Link className="dropdown-item" to="/profile-page" ><ImProfile className='mx-2' />Profile</Link>
-                                    <Link className="dropdown-item" to="/verify-page"><GiConfirmed className='mx-2' />verify</Link>
-                                </Accordion.Body>
-                            </Accordion.Item> :
-                                <div className='option-auth'>
-                                    <Link to="/login-page" className="btn rounded-pill p-0 ">Login</Link>
-                                    <button className="btn btn-primary rounded-pill ml-3"><Link to="/sign-up" className="text-white">Sign up</Link></button>
-
-                                </div>
-
-
-
-
-
-                        }
-
-                        {/* <div className={`dropdown ml-3 ${match.path.slice(1, 12) === '' ? "d-none" : "d-block"}`}>
-                            <a className="dropdown-toggle text-dark" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                Platforms
-                            </a>
-                            <ul className="dropdown-menu dropdown_menu-9" aria-labelledby="dropdownMenuLink" style={{ maxHeight: "400px", overflowY: "scroll" }}>
-                                {
-
-                                    asset_platforms?.map((e, i) => {
-                                        return <li className="w-100"><Link className="dropdown-item" to={e?.id}>{e?.name}</Link></li>
-                                    })
-                                }
-
-                            </ul>
-                        </div> */}
-
-                    </Accordion>
-
-
-                </div> : null
+                barMenu ? <MenuMobile authUser={authUser} match={match} asset_platforms={asset_platforms} setDisplayMenu={setDisplayMenu} handleLogOut={handleLogOut} /> : null
             }
 
             <div className="top-header">
@@ -252,7 +159,7 @@ export default function Header() {
                                         <div className='trending-search'>
                                             <p>Trending</p>
                                             <RiErrorWarningLine className='mx-2' />
-                                            <ImFire />
+                                            <ImFire style={{ color: "orange" }} />
                                         </div>
 
                                         <ul className='divUlsearch'>
@@ -262,6 +169,7 @@ export default function Header() {
                                                         <a className="d-flex" href={`/detail-coin/${e?.id}`}>
                                                             <img src={e?.image} width={30} className="mx-2" height={30} alt="" />
                                                             <span>{e?.name}</span>
+                                                            {/* <span style={{ marginLeft: "auto" }}> <p className="text-right text-success">#{e?.market_cap_rank}</p></span> */}
                                                             <span style={{ marginLeft: "auto" }}>{e?.price_change_percentage_24h < 0 ? <p className="text-right text-danger">{e?.price_change_percentage_24h.toFixed(2)}%</p> : <p className="text-right text-success">{e?.price_change_percentage_24h.toFixed(2)}%</p>}</span>
                                                         </a>
 
@@ -279,7 +187,7 @@ export default function Header() {
                                         </a>
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink" style={{ maxHeight: "300px", overflowY: "scroll", textAlign: "left" }}>
                                             <li><Link className="dropdown-item" to="#" onClick={() => handleLogOut()}><BiLogOut />Logout</Link></li>
-                                            <li><Link className="dropdown-item" to="/profile-page" ><ImProfile />Profile</Link></li>
+                                            <li><Link className="dropdown-item" to="/author-profile-page" ><ImProfile />Author</Link></li>
                                             <li><Link className="dropdown-item" to="/verify-page"><GiConfirmed />verify</Link></li>
                                         </ul>
                                     </div></li> :
@@ -292,7 +200,9 @@ export default function Header() {
 
 
                                 }
-
+                                {/* <li>
+                                    <BsFillMoonFill />
+                                </li> */}
                                 <li>
                                     <div className={`dropdown ${match.path.slice(1, 12) !== 'login-page' && match.path.slice(1, 12) !== 'sign-up' ? "d-block" : "d-none"} `}>
                                         <DropdownButton id="" title="  English">
@@ -310,6 +220,7 @@ export default function Header() {
                                         </ul> */}
                                     </div>
                                 </li>
+
                             </ul>
                         </nav>
                         <FaBars className='bar-menu ml-3' onClick={() => setDisplayMenu(true)} />
@@ -318,7 +229,7 @@ export default function Header() {
                 </div>
             </div>
             <hr />
-            <div className={`bottom-header ${match.path.slice(1, 12) !== 'login-page' && match.path.slice(1, 12) !== 'sign-up' ? "d-block" : "d-none"} `}>
+            <div className={`bottom-header ${match.path.slice(1, 13) === 'profile-page' ? "d-none" : "d-block"} `}>
                 <div className="center-list">
                     <ul>
                         <li><a >All Coins</a>

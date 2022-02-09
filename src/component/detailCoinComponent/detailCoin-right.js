@@ -70,11 +70,11 @@ export default function DetailCoinRight({ e }) {
                 <h5>Current Converter</h5>
                 <Nav variant="pills" defaultActiveKey="#" className='mb-3'>
                     <Nav.Item>
-                        <Nav.Link href="#" onClick={() => setOpen(!openActiveSwap)}>Active</Nav.Link>
+                        <Nav.Link href="#" onClick={() => setOpen(false)}>Active</Nav.Link>
 
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="link-1" onClick={() => setOpen(!openActiveSwap)}>Swap coin</Nav.Link>
+                        <Nav.Link eventKey="link-1" onClick={() => setOpen(true)}>Swap coin</Nav.Link>
                     </Nav.Item>
                     {/* <Nav.Item>
                         <Nav.Link eventKey="disabled" disabled>
@@ -114,6 +114,9 @@ export default function DetailCoinRight({ e }) {
                         <p className="flex-end">$0.003</p>
                     </div>
                 </div>
+            </div>
+            <div className=" detail-right-container mt-3">
+                <img src={e?.image} alt="" width={200} height={200} />
             </div>
         </div>
     )

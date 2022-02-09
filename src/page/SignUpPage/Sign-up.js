@@ -7,7 +7,7 @@ export default function SignUpPage() {
     return (
         <div>
             <section className="container-all">
-                <Header />
+                {/* <Header /> */}
                 <SignUp />
                 {/* <Footer /> */}
             </section>

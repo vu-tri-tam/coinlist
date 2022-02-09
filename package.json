@@ -32,6 +32,7 @@
     "react-loading": "^2.0.3",
     "react-multistep-wizard": "^3.1.0",
     "react-notifications": "^1.7.2",
+    "react-paginate": "^8.1.0",
     "react-plotly.js": "^2.5.1",
     "react-popper-tooltip": "^4.3.1",
     "react-rangeslider": "^2.2.0",

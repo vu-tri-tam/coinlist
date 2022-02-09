@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,35 +19,75 @@ import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import ProtectedRoute from './protectedRoute';
 import NotFound from './comon/404NotFound/notFound';
+import LoadingProgress from './comon/reactLoadingProgress/loadingProgress';
+import Profile from './component/profileComponent/profile';
+import ProfilePage from './page/profilePage/profilePage';
 
 function App() {
+  const [state, setstate] = useState(false)
+  useEffect(() => {
+    setstate(true)
+    setTimeout(() => {
+      setstate(false)
+    }, 1000);
+  }, [])
+
+  const routes = [
+    {
+      path: "/",
+      component: HomePage
+    },
+    {
+      path: "/detail-coin/:id",
+      component: DetailPage
+
+    }
+    ,
+    {
+      path: "/wallet-page",
+      component: WalletPage
+
+    }
+    ,
+    {
+      path: "/login-page",
+      component: LoginPage
+
+    }
+    ,
+    {
+      path: "/sign-up",
+      component: SignUpPage
+
+    },
+    {
+      path: "/verify-page",
+      component: VerifyPage
+
+    },
+    {
+      path: "/author-profile-page",
+      component: ProfilePage
+
+    },
+    {
+      path: "*",
+      component: NotFound
+
+    }
+
+  ];
   return (
     <div className="App">
       <NotificationContainer />
       <Router>
         <Switch>
-          <ProtectedRoute component={HomePage} path="/home" exact />
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
-          <Route path="/detail-coin/:id" exact>
-            <DetailPage />
-          </Route>
-          <Route path="/wallet-page" exact>
-            <WalletPage />
-          </Route>
-          <Route path="/login-page" exact>
-            <LoginPage />
-          </Route>
-          <Route path="/sign-up" exact>
-            <SignUpPage />
-          </Route>
-          <Route path="/verify-page" exact>
-            <VerifyPage />
-          </Route>
-          <Route path="*" exact>
-            <NotFound />
-          </Route>
+          {routes.map((route, i) => (
+
+            <Route component={state ? LoadingProgress : route.component} path={route.path} exact />
+          ))}
+          {/* {/* <ProtectedRoute component={HomePage} path="/home" exact /> */}
+
         </Switch>
       </Router>
     </div>

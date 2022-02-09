@@ -9,6 +9,8 @@ import AxiosConfigUser from '../../../Api/callAPI/callApi';
 import PageRefresh from './pageRefresh';
 import AlertCoin from '../../../comon/alertCoin/alertCoin';
 import OffCanvassOption from '../../../comon/offCanvas/offCanvasOption';
+import { useSelector } from 'react-redux';
+import notification from "../../../comon/notification/notification"
 // AxiosConfigSever
 
 export default function SwapCoin({ e, coins }) {
@@ -27,8 +29,10 @@ export default function SwapCoin({ e, coins }) {
     const [show, setShow] = useState(false);
     const [error, setError] = useState(false);
     const [showWallet, setShowWallet] = useState(false);
+    const [quantilyInsideWallet, setQuantily] = useState();
     // const [coinByRefresh, setCoinRefresh] = useState(false)
     // console.log(countPrice);
+    const authUser = useSelector(state => state.auth)
     const [choosePrice, setChoose] = useState({
         id: null,
         name: "",
@@ -52,7 +56,14 @@ export default function SwapCoin({ e, coins }) {
         setShow(status)
     }
     const handleShowWallet = (status) => {
-        setShowWallet(status)
+        console.log(authUser.length, 'ggg');
+        if (authUser.length <= 0) {
+
+            notification.error('Đăng nhập trước khi thao tác')
+        } else {
+            setShowWallet(status)
+        }
+
     }
     const handleChoosePrice = async (id) => {
 
@@ -72,7 +83,7 @@ export default function SwapCoin({ e, coins }) {
     const handleChoosePriceWallet = (id) => {
 
         const filterName = user?.wallet?.filter((el, idx) => el?._id === id)
-        console.log(filterName[0]?.total_swap, 777);
+        // console.log(filterName[0]?.total_swap, 777);
         setChooseWallet({
             id: filterName[0]?._id,
             name: filterName[0]?.name_token,
@@ -96,7 +107,7 @@ export default function SwapCoin({ e, coins }) {
 
 
     const handleFindCoinSwapFinish = (data, data_Price) => {
-        console.log(chooseCoinWallet?.name, "choose");
+        // console.log(chooseCoinWallet?.name, "choose");
         const findIdCoinSwapFinish = data?.findIndex((ele) => ele?.name_token === chooseCoinWallet?.name)
 
         if (findIdCoinSwapFinish !== -1) {
@@ -107,13 +118,14 @@ export default function SwapCoin({ e, coins }) {
     }
 
     const handlePriceCoin = async (coins, data_Price) => {
+        // console.log(quantilyInsideWallet, 'data');
         handleShowAlert(true)
 
         const findIdCoinSwapDupplicate = user?.wallet?.findIndex((ele) => ele?.name_token === coins?.name)
         const findIdCoinSwapFinish = user?.wallet?.findIndex((ele) => ele?.name_token === chooseCoinWallet?.name)
         // console.log(user.wallet[findIdCoinSwapFinish].total_swap -= data_Price, '666');
         if (findIdCoinSwapFinish !== -1) {
-            user.wallet[findIdCoinSwapFinish].total_swap -= data_Price
+            user.wallet[findIdCoinSwapFinish].total_swap -= quantilyInsideWallet
         }
 
         //điều kiện để xử lí mảng wallet 
@@ -134,7 +146,7 @@ export default function SwapCoin({ e, coins }) {
 
         }
         //sau khi xử lí xong ta thay thế mảng hiện tại thành mảng đã xử lí để có kết quả
-        console.log({ ...user, wallet: user.wallet }, 65656565);
+        // console.log({ ...user, wallet: user.wallet }, 65656565);
         await AxiosConfigUser.updateWalletUser(user?._id, { ...user, wallet: user.wallet })
 
 
@@ -143,7 +155,7 @@ export default function SwapCoin({ e, coins }) {
     }
 
     const handlePrice = (data) => {
-
+        setQuantily(data)
         data <= chooseCoinWallet?.price ? setError(false) : setError(true)
         const filterNameById = coins?.filter((el, idx) => el?.id === choosePrice?.id)
         const filterName = coins?.filter((el, idx) => el?.symbol === chooseCoinWallet?.name)
@@ -153,6 +165,7 @@ export default function SwapCoin({ e, coins }) {
             priceFinal / filterNameById[0]?.current_price
         )
     }
+    // console.log(quantilyInsideWallet, 'quan');
 
     return (
         <div className={`detail-right-swap `}>

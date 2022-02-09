@@ -11,6 +11,9 @@ import {
 import DetailCoinLeft from './detailCoin-left';
 import DetailCoinRight from './detailCoin-right';
 import Loading from '../../comon/loading';
+import News from './newsComponent/news';
+import TradingMarket from './TradingMarket/tradingMarket';
+import Populars from './popularCoin/populars';
 export default function DetailCoin() {
     let { id } = useParams();
 
@@ -25,7 +28,11 @@ export default function DetailCoin() {
 
         }
         filterCoinsById()
-
+        window.scrollTo({
+            top: 300,
+            left: 100,
+            behavior: 'smooth'
+        });
     }, [id])
 
     return (
@@ -33,8 +40,14 @@ export default function DetailCoin() {
         <section className="section-item" >
 
             <div className="detail-main">
-                <DetailCoinLeft e={coins[0]} id={coins[0]?.id} />
-                <DetailCoinRight e={coins[0]} />
+                <div className='d-flex detail-item'>
+                    <DetailCoinLeft e={coins[0]} id={coins[0]?.id} />
+                    <DetailCoinRight e={coins[0]} />
+                </div>
+
+                <News id={id} e={coins[0]} />
+                <TradingMarket id={id} />
+                <Populars />
             </div>
 
 

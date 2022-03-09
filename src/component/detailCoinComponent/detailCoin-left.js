@@ -46,7 +46,7 @@ export default function DetailCoinLeft({ e, id }) {
     return (
         <div className="detail-main-left">
             <div className="link">
-                <ul className="p-2">
+                <ul className="p-0">
                     <li><Link to="/">All price</Link><span className="mx-2">&gt;</span></li>
                     <li>{e?.name} Price</li>
                 </ul>

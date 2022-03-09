@@ -4,6 +4,7 @@ import Tooltip from '../../../comon/toolTips'
 import { AxiosConfig } from '../../../Api/configAxios';
 export default function ActiveCoin({ e, choosePrice, countPrice, coins, handleChoosePrice, handlePrice }) {
     const [state, setstate] = useState(false)
+    console.log(countPrice, 'count');
     // useEffect(() => {
     //     const getStableCoin = async () => {
     //         await AxiosConfig.getAllCoinTop()?.then((res) => setCoins(res?.data))
@@ -88,7 +89,7 @@ export default function ActiveCoin({ e, choosePrice, countPrice, coins, handleCh
                     </div>
                 </div>
                 <div className="detail-right-form p-2">
-                    <input type="text" Value={countPrice || 0} className={`fomat-input border-0 ${choosePrice.name === "" ? "d-none" : "d-block"}`} style={{ outline: "none" }} />
+                    <input type="text" value={countPrice || 0} className={`fomat-input border-0 ${choosePrice.name === "" ? "d-none" : "d-block"}`} style={{ outline: "none" }} />
                 </div>
             </div>
             <div style={{ position: "relative" }}>

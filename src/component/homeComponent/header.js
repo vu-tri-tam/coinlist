@@ -98,7 +98,7 @@ export default function Header() {
             <div className="top-header">
                 <div className=" titlbracum-left d-flex">
                     <Link to="/" className=" titlbracum-left d-flex">
-                        <span className="mx-2"><img src="./images/pols.png" width={30} height={30} /></span>
+                        <span style={{ marginRight: "2%" }}><img src="./images/pols.png" width={30} height={30} /></span>
                         <h5 className="m-0">Polkastater<span>POLS</span></h5>
                     </Link>
                     {/* <a href="https://lottiefiles.com/76649-checked">success</a> */}
@@ -170,7 +170,7 @@ export default function Header() {
                                                             <img src={e?.image} width={30} className="mx-2" height={30} alt="" />
                                                             <span>{e?.name}</span>
                                                             {/* <span style={{ marginLeft: "auto" }}> <p className="text-right text-success">#{e?.market_cap_rank}</p></span> */}
-                                                            <span style={{ marginLeft: "auto" }}>{e?.price_change_percentage_24h < 0 ? <p className="text-right text-danger">{e?.price_change_percentage_24h.toFixed(2)}%</p> : <p className="text-right text-success">{e?.price_change_percentage_24h.toFixed(2)}%</p>}</span>
+                                                            <span style={{ marginLeft: "auto" }}>{e?.price_change_percentage_24h < 0 ? <p className="text-right text-danger">{e?.price_change_percentage_24h.toFixed(2)}%</p> : <p className="text-right text-success">{e?.price_change_percentage_24h ? e?.price_change_percentage_24h.toFixed(2) : "Đang cập nhật"}%</p>}</span>
                                                         </a>
 
                                                     </li>

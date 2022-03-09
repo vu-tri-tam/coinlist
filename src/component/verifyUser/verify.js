@@ -19,7 +19,7 @@ export default function VerifyComponent() {
     const [coinMe, setCoinme] = useState(false)
     const [user, setUser] = useState(false)
     const [userVerify, setUserVerify] = useState()// nếu xử lí và lưu một kết quả nào đó mà không bị thừa data mỗi khi save thì nên để state là ()
-    // console.log(userVerify, 77766);
+    console.log(userVerify, 77766);
     // useEffect(() => {
     //     const handleSubmitLogin = async () => {
 
@@ -111,6 +111,7 @@ export default function VerifyComponent() {
     const handleClose = (status) => {
         setstate(status)
     }
+    console.log(verifyUser?.length, 909);
     // const verifyUserKyc = verifyUser ? verifyUser[0].idUser : null
 
     return (
@@ -146,7 +147,7 @@ export default function VerifyComponent() {
                     <div className="p-4">
                         <h5>Identity Verification</h5>
                         <p className="mb-2">In order to take part in daomaker.com products and services - you have to complete Identity Verification.</p>
-                        <button className="rounded-pill btn-primary btn animation-btn" disabled={authUser && authUser[0]?.verify !== false || verifyUser[0]?.idUser === authUser[0]?.id ? true : false} data-hover="Continue kyc" onClick={() => handleClose(true)}>
+                        <button className="rounded-pill btn-primary btn animation-btn" disabled={authUser[0]?.verify !== false || verifyUser[0]?.idUser === authUser[0]?.id || verifyUser?.length > 0 ? true : false} data-hover="Continue kyc" onClick={() => handleClose(true)}>
 
                             {/* <div>{authUser[0]?.verify !== false ? <div><span className="mx-2"><BsFillPatchCheckFill /></span>Complete kyc</div> : verifyUser[0]?.idUser !== authUser[0]?.id ? "continue kyc" : "pendding"}</div> */}
                             <div>{

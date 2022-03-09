@@ -1,8 +1,8 @@
 import Swal from 'sweetalert2'
 
-const SwalAlert = ({ title }) => {
+const SwalAlert = ({ tittle }) => {
     Swal.fire({
-        title: title,
+        title: tittle,
         text: 'Bạn sẽ không thể thay đổi hãy cân nhắc trước khi quyết định!',
         icon: 'warning',
         showCancelButton: true,

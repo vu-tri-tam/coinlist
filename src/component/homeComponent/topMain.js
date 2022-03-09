@@ -77,7 +77,7 @@ export default function TopMain() {
         <div>
             <section className="section-item">
                 <div>
-                    <h5 className='p-1'>Top Movers</h5>
+                    <h5>Top Movers</h5>
                 </div>
                 <div className="all-item-coin mt-4">
                     <div className="swiper-container">

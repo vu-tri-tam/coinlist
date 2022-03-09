@@ -31,7 +31,7 @@ export default function TrenddingCoin() {
     };
 
     return (
-        <div className="App">
+        <div className='mb-3'>
             <h5>Top trendding <AiOutlineFire /></h5>
 
             <Slider {...settings}>

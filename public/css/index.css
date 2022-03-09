@@ -1,5 +1,5 @@
 *{
-    font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Vazir', sans-serif;
     color: var(--chakra-colors-gray-800);
     /* background: rgb(248, 249, 251); */
     /* overflow: auto; */
@@ -14,19 +14,19 @@ h5{
 }
 
 /* css scroll */
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 6px;
     border-radius: 100px;
     border: 5px solid transparent;
     background-clip: content-box;
     background-color: #8070d4;
 }
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     border-radius: 100px;
     background: #c8befc;
   
 }
-body::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background-color: #e4e4e4;
     border-radius: 100px;
 }
@@ -114,7 +114,7 @@ header .top-header::after{
     border: 1px solid gray;
 }
 .bottom-header{
-    padding-bottom: 1%;
+    padding-bottom: 2%;
 }
 a{
     text-decoration: none;
@@ -142,7 +142,7 @@ a{
 }
 .bottom-header ul{
     margin: 0;
-    padding: 1%;
+    padding: 0;
 }
 .bottom-header ul li{
     /* padding: 1%; */
@@ -1101,7 +1101,7 @@ color: white;
     width: 12rem;
     height: 12rem;
     position: absolute;
-    top: 14rem;
+    top: 18rem;
     /* left: 10%; */
     border-radius: 50% 50%;
 }
@@ -1218,8 +1218,10 @@ font-weight: 400;
 .list-info ul li{
 display: block;
 white-space: nowrap;
+margin-bottom: 1%;
 }
 .list-info ul li svg{
+    color: #3f884f;
     font-size: 1.2rem;
     /* padding: 5%; */
     margin-right: 3%;
@@ -1424,6 +1426,17 @@ a{
 }
 
 
+ /* list comment */
+ .item-comment-repply ul {
+     padding: 0;
+ }
+ .item-comment-repply ul li {
+     padding-right: 2%;
+ }
+ .showAllComment{
+     font-size: 0.9rem;
+ }
+ /* list comment */
 
 
 /*END  BORDER ACTIVE TAB WALLET */
@@ -2156,8 +2169,8 @@ padding: 0;
         width: 100%;
     }
     .profile-main .profile-avatar {
-
-
+        
+        top: 16rem;
         left: 24%;
 
     }
@@ -2187,6 +2200,9 @@ padding: 0;
     .profile-interest, .profile-kill, .profile-goals-time, .profile-goals-img {
     width: 100%;
     /* position: relative; */
+    }
+    .profile-goals-time-container{
+        flex-direction: column;
     }
     .list-info{
         margin-top: 4%;

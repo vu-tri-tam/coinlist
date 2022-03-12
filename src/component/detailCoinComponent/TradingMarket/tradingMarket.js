@@ -22,11 +22,8 @@ export default function TradingMarket({ id }) {
     return <div className="feel-user mt-5">
         <div className=" d-flex">
             <h5>Danh sách công ty đại chúng nắm giữ</h5>
-
             {/* <span className=" bg-primary rounded-pill p-1 text-white mx-2">Vĩnh cửu</span> */}
         </div>
-
-
         <div className="mt-3">
             <table className="fl-table">
                 <thead>
@@ -35,23 +32,18 @@ export default function TradingMarket({ id }) {
                         <th>Name/Country</th>
                         <th>Symbol</th>
                         <th>Percentage_of_total_supply</th>
-
                         <th>Total_current_value_usd</th>
                         <th>Total_entry_value_usd</th>
                         <th>Total_holdings</th>
                         <th>Tin cậy</th>
-
                     </tr>
                 </thead>
                 <tbody>
                     {
                         current?.length > 0 ? current?.map((e, i) => {
-
                             return <tr>
                                 {/* <td><AiOutlineStar /></td> */}
-
                                 <td>{i}</td>
-
                                 <td>
                                     <div className="d-flex text-left">
                                         {/* <div className="chart-coin ">
@@ -68,8 +60,6 @@ export default function TradingMarket({ id }) {
                                 </td>
                                 <td>{e?.symbol}</td>
                                 <td>{e?.percentage_of_total_supply}$</td>
-
-
                                 <td>{e?.total_current_value_usd.toLocaleString()}$</td>
                                 <td>{e?.total_entry_value_usd.toLocaleString()}$</td>
                                 <td>{e?.total_holdings}</td>
@@ -87,7 +77,6 @@ export default function TradingMarket({ id }) {
                 <tbody>
                 </tbody>
             </table>
-
         </div>
         <div className="text-center mt-3">
             <Pagination usePage={usePage} totalPage={company?.companies?.length} setIndexFirt={setIndexFirt} />

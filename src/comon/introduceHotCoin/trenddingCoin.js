@@ -6,7 +6,7 @@ import { AxiosConfig } from "../../Api/configAxios";
 import { AiOutlineFire } from 'react-icons/ai';
 export default function TrenddingCoin() {
     const [trendding, setTrendding] = useState([])
-    console.log(trendding, 'trend');
+    // console.log(trendding, 'trend');
     useEffect(() => {
         AxiosConfig.getTrendding()?.then(res => setTrendding(res?.data))
     }, [])

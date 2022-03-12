@@ -64,7 +64,7 @@ export default function MenuMobile({ setDisplayMenu, asset_platforms, authUser, 
                     <Accordion.Header>{authUser[0]?.userName}</Accordion.Header>
                     <Accordion.Body>
                         <Link className="dropdown-item" to="#" onClick={() => handleLogOut()}><BiLogOut className='mx-2' />Logout</Link>
-                        <Link className="dropdown-item" to="/profile-page" ><ImProfile className='mx-2' />Profile</Link>
+                        <Link className="dropdown-item" to="/author-profile-page" ><ImProfile className='mx-2' />Author</Link>
                         <Link className="dropdown-item" to="/verify-page"><GiConfirmed className='mx-2' />verify</Link>
                     </Accordion.Body>
                 </Accordion.Item> :

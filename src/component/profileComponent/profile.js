@@ -204,14 +204,10 @@ export default function Profile() {
                                 <div className='profile-goals-img'>
                                     <img src={avatar} alt="" />
                                 </div>
-
                             </div>
                         </ScrollAnimation>
-
-                        <ScrollAnimation animateIn='bounceInRight'
-                        >
+                        <ScrollAnimation animateIn='bounceInRight'>
                             <div className="profile-main-bottom mt-5 w-100 ">
-
                                 <div className='profile-goals-container'>
                                     <h5 className='flex-box mb-5'>
                                         <div className='custom-bg-icon'><BiArchive /></div>
